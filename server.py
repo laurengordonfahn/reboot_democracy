@@ -6,6 +6,9 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from flask_bcrypt import Bcrypt
 
+#for env variables
+import os
+
 #Need to create and import Classes in Database model.py
 #ADD ALL CLASSES FROM MODELS!
 from model import  *
@@ -24,6 +27,9 @@ from server_functions import * #current_user()
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 app.secret_key = "Team Power Stance"
+
+# value of key from shell environment
+    apikey=os.environ["GMJSAPIKEY"]
 
 # Normally, if you use an undefined variable in Jinja2, it fails
 # silently. This is horrible. Fix this so that, instead, it raises an
