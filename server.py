@@ -44,6 +44,26 @@ app.jinja_env.auto_reload = True
 
 #####PLACE ALL ROUTES HERE######
 
+@app.route('/')
+def index():
+    """ Render Sign-In page """
+    return render_template('index.html', current_user=current_user())
+
+@app.route('/login', methods=[POST])
+def login_form():
+    pass
+
+@app.route('/sign_up')
+def sign_up():
+    """ Render Sign-Up page"""
+    return render_templates('sign_up.html', current_user=current_user())
+
+
+@app.route('/profile')
+def profile():
+    """ Render profile page"""
+    return render_templates('profile.html', current_user=current_user())
+
 
 
 
