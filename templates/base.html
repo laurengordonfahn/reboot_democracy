@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Hands and Hearts Across America{% endblock %}</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
+
+</head>
+<body>
+
+    {% if 'current_user' not in session %}
+
+        <a href="Sign-Up"></a>
+        <a href="Log-In"></a>
+
+    {% endif %}
+
+     {% if 'current_user'  in session %}
+
+        <a href="Log-Out"></a>
+
+    {% endif %}
+        
+    TODO: Q IF I WANT THIS LINK ON THE BASE WHEN ITS
+    <a href="index.html">Home</a>
+
+     
+
+   
+   
+
+    
+    {% for message in get_flashed_messages() %}
+            
+        {{ message }}
+           
+    {% endfor %}
+
+
+    {% block content %}{% endblock%}
+
+
+<script src="https://code.jquery.com/jquery.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="/static/general.js" type="text/javascript"> </script>
+
+</body>
+</html>
