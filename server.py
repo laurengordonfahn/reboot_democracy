@@ -48,7 +48,7 @@ app.jinja_env.auto_reload = True
 def index():
     """ Render Sign-In page """
     return render_template('index.html', 
-                            'apikey'=apikey, 
+                            apikey=apikey, 
                             current_user=current_user())
 
 @app.route('/login', methods=['POST'])
