@@ -29,7 +29,7 @@ bcrypt = Bcrypt(app)
 app.secret_key = "Team Power Stance"
 
 # value of key from shell environment
-    apikey=os.environ["GMJSAPIKEY"]
+apikey=os.environ["GMJSAPIKEY"]
 
 # Normally, if you use an undefined variable in Jinja2, it fails
 # silently. This is horrible. Fix this so that, instead, it raises an
