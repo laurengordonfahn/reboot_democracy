@@ -1,12 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<!--
 <h1>Hands and Hearts Across America</h1>
-
+-->
 <div>
    
   <body>
+    <div class="header"><img style="margin-top:-10px;" src="/static/img/logoside.png" /></div>
+
+      <div class="overlay" id="overlay"></div>
+  <div class="bigbox" id="intro">
+      <div class="logo">
+        <img src="/static/img/logo.png" />
+        </div>
+    <hr>
+        <p>It’s not about us. It is about uniting our country in three core values and creating long lasting sustainable action for our country. </br> <a href="about.html">Read more about us.</a>
+        </p>
+        <div class="fblogin"><img src="/static/img/getstarted.png" width="230" height="45" onclick="getstarted()"/></div>
+    </div>
+
+<div id="nameform" class="bigbox" hidden="true">
+<form action="#" onsubmit="return submitForm(this);">
+    <label for="fname">Full Name</label>
+    <input type="text" id="fname" name="firstname">
+    <br/>
+    <br/>
+    <label for="cause">Name of Cause</label>
+    <input type="text" id="lname" name="lastname">
+    <br/>
+    <br/>
+    <label for="country">Privacy</label>
+    <select id="country" name="country">
+      <option value="australia">Public</option>
+      <option value="canada">Private</option>
+    </select>
+    <br/>
+    <br/>
+    <input type="submit" value="Submit">
+  </form>
+</div>
     <div id="map"></div>
     <div
         class="fb-like"
@@ -14,13 +47,11 @@
         data-width="450"
         data-show-faces="true">
     </div>
-    
-        
   </body>
 </html>
 </div>
 
-
+<!--
 <div> 
     <h3> Our Mission Is Simple: </h3>
     <h2> Kindness, Inclusion, Respect </h2>
@@ -39,6 +70,8 @@
 <div>
     <button>Sign-Up</button> <button>Log-In</button>
 </div>
+
+-->
 
 <script src="/static/javascript/index.js" type="text/javascript"> </script>
 <script async defer
