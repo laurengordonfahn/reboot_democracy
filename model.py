@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-
+import os
 
 # This is the connection to the PostgreSQL database; we're getting this through
 # the Flask-SQLAlchemy helper library. On this, we can find the `session`
@@ -9,24 +9,16 @@ import datetime
 db = SQLAlchemy()
 
 # Helper functions
+def connect_to_db(app, db_uri=None):
+    """Connect our application to our database."""
 
-def connect_to_db(app,url='postgresql:///reboot_democracy'):
-    """Connect the database to our Flask app."""
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or os.environ.get("DATABASE_URL")
 
-    # Configure to use our PstgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     db.app = app
     db.init_app(app)
     app.config['SQLALCHEMY_ECHO'] = True
-
-# Heroku Deployement Dependency
-
-def connect_to_db(app, db_uri=None):
-    """Connect our application to our database."""
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgres:///reboot_democracy_heroku'
 
 #### To enable Aware DateTime 
 import pytz  # from PyPI
@@ -87,12 +79,12 @@ class Image(db.Model):
     image_url=db.Column(db.String(2083))
 
 
-
 if __name__ == "__main__":
     # As a convenience, if we run this module interactively, it will leave
     # you in a state of being able to work with the database directly.
 
     from server import app
+
     connect_to_db(app)
     db.create_all()
     print "Connected to DB."
