@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 
 # This is the connection to the PostgreSQL database; we're getting this through
@@ -27,7 +28,17 @@ def connect_to_db(app, db_uri=None):
 
     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgres:///reboot_democracy'
 
+#### To enable Aware DateTime 
+import pytz  # from PyPI
 
+class AwareDateTime(db.TypeDecorator):
+    '''Results returned as aware datetimes, not naive ones.
+    '''
+
+    impl = db.DateTime
+
+    def process_result_value(self, value, dialect):
+        return value.replace(tzinfo=pytz.utc)
 
 
 ##### PLACE ALL CLASSES HERE FOR DB ########
@@ -37,18 +48,32 @@ class User(db.Model):
     user_id=db.Column(db.Integer,
                         primary_key=True,
                         autoincrement=True)
+    fname=db.Column(db.String(35), nullable=False)
+    lname=db.Column(db.String(75), nullable=False)
     username=db.Column(db.String(50), nullable=False, unique=True)
     email=db.Column(db.String(100), nullable=False, unique=True)
     #large capasity for password due to encryption
     password=db.Column(db.String(128), nullable=False, unique=False)
     charity=db.Column(db.String(128))
     charity_url=db.Column(db.String(2083))
-    address1=db.Column(db.String(500))
-    address2=db.Column(db.String(100))
-    city=db.Column(db.String(100))
-    state=db.Column(db.String(2))
-    zip_code=db.Column(db.Integer)
+    # address1=db.Column(db.String(500))
+    # address2=db.Column(db.String(100))
+    # city=db.Column(db.String(100))
+    # state=db.Column(db.String(2))
+    # zip_code=db.Column(db.Integer)
     profile_img=db.Column(db.String(2083))
+
+class Location(db.Model):
+    __tablename__="locations"
+    location_id=db.Column(db.Integer, 
+                        primary_key=True,
+                        autoincrement=True)
+    latitude=db.Column(db.Float, nullable=True)
+    longitude=db.Column(db.Float, nullable=True)
+    event_time=db.Column(db.DateTime)
+    timezone=db.Column(db.Column(AwareDateTime, default=db.func.now(), nullable=False)
+
+
 
 class Image(db.Model):
     __tablename__="images"
