@@ -23,10 +23,10 @@ def connect_to_db(app,url='postgresql:///reboot_democracy'):
 
 # Heroku Deployement Dependency
 
-def connect_to_db(app, db_uri=None):
-    """Connect our application to our database."""
+# def connect_to_db(app, db_uri=None):
+#     """Connect our application to our database."""
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgres:///reboot_democracy'
+#     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgres:///reboot_democracy_heroku'
 
 #### To enable Aware DateTime 
 import pytz  # from PyPI
@@ -50,7 +50,8 @@ class User(db.Model):
                         autoincrement=True)
     fname=db.Column(db.String(35), nullable=False)
     lname=db.Column(db.String(75), nullable=False)
-    username=db.Column(db.String(50), nullable=False, unique=True)
+    #TODO replace username unique att
+    username=db.Column(db.String(50), nullable=False)
     email=db.Column(db.String(100), nullable=False, unique=True)
     #large capasity for password due to encryption
     password=db.Column(db.String(128), nullable=False, unique=False)
@@ -71,7 +72,8 @@ class Location(db.Model):
     latitude=db.Column(db.Float, nullable=True)
     longitude=db.Column(db.Float, nullable=True)
     event_time=db.Column(db.DateTime)
-    timezone=db.Column(db.Column(AwareDateTime, default=db.func.now(), nullable=False)
+    user_id=db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    # tzone=db.Column(db.Column(AwareDateTime, default=db.func.now(), nullable=False))
 
 
 
