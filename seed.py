@@ -2,11 +2,12 @@ from sqlalchemy import func
 #import all classes from model.py to enable funcitons to run here
 from model import User
 from model import Image
+from model import Location
 
 from model import connect_to_db, db
 from server import app, bcrypt
 from faker import Factory
-from random import random
+import random
 
 fake=Factory.create()
 
@@ -33,6 +34,8 @@ def load_users():
 def load_locations():
     """ Load the Locations from random generated data for demo"""
 
+    
+
     Location.query.delete()
     #there are 36 users in the fake data for users
     orgin_x = 37.7811539
@@ -41,10 +44,17 @@ def load_locations():
 
     origin = (orgin_x - maxRadius, orgin_y - maxRadius)
 
-    for num in range(37):
+    for user in User.query.all():
+        print(user.user_id)
+        user_id=user.user_id
+
         randomPoint = (orgin_x + (random.random() * maxRadius * 2),
                        orgin_y + (random.random() * maxRadius * 2))
-        location = Location(latitude=randomPoint[0], longitutde=randomPoint[1])
+        location = Location(latitude=randomPoint[0], longitude=randomPoint[1], event_time="2016-01-20T09:00:00", user_id=user_id )
+        db.session.add(location)
+    db.session.commit()
+
+        
 
 
 def load_all():

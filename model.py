@@ -23,10 +23,10 @@ def connect_to_db(app,url='postgresql:///reboot_democracy'):
 
 # Heroku Deployement Dependency
 
-# def connect_to_db(app, db_uri=None):
-#     """Connect our application to our database."""
+def connect_to_db(app, db_uri=None):
+    """Connect our application to our database."""
 
-#     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgres:///reboot_democracy_heroku'
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgres:///reboot_democracy_heroku'
 
 #### To enable Aware DateTime 
 import pytz  # from PyPI
