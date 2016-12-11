@@ -6,30 +6,30 @@ from model import Location
 
 from model import connect_to_db, db
 from server import app, bcrypt
-from faker import Factory
+# from faker import Factory
 import random
 
-fake=Factory.create()
+# fake=Factory.create()
 
 
-def load_users():
-    """ Load Users into Users Table"""
+# def load_users():
+#     """ Load Users into Users Table"""
 
-    User.query.delete()
+#     User.query.delete()
 
-    famous_list=[ "https://www.pexels.com/photo/blonde-haired-woman-in-blue-shirt-y-27411/", "https://www.pexels.com/photo/blonde-haired-woman-in-blue-shirt-y-27411/", "https://www.pexels.com/photo/man-wearing-blue-denim-buttons-up-long-sleeve-and-blace-frame-eyelgasses-26939/","https://www.pexels.com/photo/man-wearing-blue-denim-buttons-up-long-sleeve-and-blace-frame-eyelgasses-26939/", "https://www.pexels.com/photo/woman-in-white-v-neck-shirt-in-selective-focus-photography-157023/", "https://www.pexels.com/photo/man-sitting-next-to-couple-of-person-walking-on-the-street-during-daytime-211050/", "https://www.pexels.com/photo/light-person-woman-fire-5076/", "https://www.pexels.com/photo/woman-in-black-scoop-neck-shirt-smiling-38554/", "https://www.pexels.com/photo/summer-woman-nature-outdoors-108036/", "https://static.pexels.com/photos/108048/pexels-photo-108048.jpeg", "https://www.pexels.com/photo/2-person-and-1-child-connected-hands-159827/", "https://www.pexels.com/photo/sunglasses-trees-happy-glasses-58021/", "https://www.pexels.com/photo/woman-with-black-textile-87293/", "https://s3.amazonaws.com/uifaces/faces/twitter/zeldman/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/iannnnn/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/faulknermusic/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/sauro/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/zack415/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/k/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/abinav_t/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/ashleyford/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/kerem/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/jina/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/peterme/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/jm_denis/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/glif/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/tonypeterson/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/vista/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/mghoz/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/rem/128.jpg" ]
+#     famous_list=[ "https://www.pexels.com/photo/blonde-haired-woman-in-blue-shirt-y-27411/", "https://www.pexels.com/photo/blonde-haired-woman-in-blue-shirt-y-27411/", "https://www.pexels.com/photo/man-wearing-blue-denim-buttons-up-long-sleeve-and-blace-frame-eyelgasses-26939/","https://www.pexels.com/photo/man-wearing-blue-denim-buttons-up-long-sleeve-and-blace-frame-eyelgasses-26939/", "https://www.pexels.com/photo/woman-in-white-v-neck-shirt-in-selective-focus-photography-157023/", "https://www.pexels.com/photo/man-sitting-next-to-couple-of-person-walking-on-the-street-during-daytime-211050/", "https://www.pexels.com/photo/light-person-woman-fire-5076/", "https://www.pexels.com/photo/woman-in-black-scoop-neck-shirt-smiling-38554/", "https://www.pexels.com/photo/summer-woman-nature-outdoors-108036/", "https://static.pexels.com/photos/108048/pexels-photo-108048.jpeg", "https://www.pexels.com/photo/2-person-and-1-child-connected-hands-159827/", "https://www.pexels.com/photo/sunglasses-trees-happy-glasses-58021/", "https://www.pexels.com/photo/woman-with-black-textile-87293/", "https://s3.amazonaws.com/uifaces/faces/twitter/zeldman/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/iannnnn/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/faulknermusic/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/sauro/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/zack415/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/k/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/abinav_t/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/ashleyford/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/kerem/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/jina/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/peterme/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/jm_denis/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/glif/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/tonypeterson/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/vista/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/mghoz/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg", "https://s3.amazonaws.com/uifaces/faces/twitter/rem/128.jpg" ]
 
-    for num in range(len(famous_list)):
-        fname=fake.name().split(' ')[0]
-        lname=fake.name().split(' ')[1]
-        username=fname+lname
-        email=fake.email()
-        password=fake.password()
-        profile_img=famous_list[num]
+#     for num in range(len(famous_list)):
+#         fname=fake.name().split(' ')[0]
+#         lname=fake.name().split(' ')[1]
+#         username=fname+lname
+#         email=fake.email()
+#         password=fake.password()
+#         profile_img=famous_list[num]
 
-        person = User(fname=fname, lname=lname, username=username, email=email, password=password, profile_img=profile_img)
-        db.session.add(person)
-    db.session.commit()
+#         person = User(fname=fname, lname=lname, username=username, email=email, password=password, profile_img=profile_img)
+#         db.session.add(person)
+#     db.session.commit()
 
 def load_locations():
     """ Load the Locations from random generated data for demo"""
