@@ -20,6 +20,13 @@ def connect_to_db(app,url='postgresql:///reboot_democracy'):
     db.init_app(app)
     app.config['SQLALCHEMY_ECHO'] = True
 
+# Heroku Deployement Dependency
+
+def connect_to_db(app, db_uri=None):
+    """Connect our application to our database."""
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgres:///reboot_democracy'
+
 
 
 

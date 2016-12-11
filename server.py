@@ -81,6 +81,10 @@ if __name__ == "__main__":
     # Once I have a db I must activate this
     connect_to_db(app)
 
+    #heroku deployment dependency
+    connect_to_db(app, os.environ.get("DATABASE_URL"))
+
+
     # Use the DebugToolbar
     DebugToolbarExtension(app)
     
