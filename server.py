@@ -103,15 +103,13 @@ def to_json(model):
 @app.route('/sign_up')
 def sign_up():
     """ Render Sign-Up page"""
-    return render_templates('sign_up.html', current_user=current_user())
+    return render_template('sign_up.html', current_user=current_user())
 
 
 @app.route('/profile')
 def profile():
     """ Render profile page"""
-    return render_templates('profile.html', current_user=current_user())
-
-
+    return render_template('profile.html', current_user=current_user())
 
 
 
